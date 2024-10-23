@@ -50,23 +50,17 @@ Implement sample JSON data and test the evaluate_rule endpoint for different con
 
 Getting Started
 Clone the repository:
-
-bash
-Copy code
 git clone <repository-url>
+
 Navigate to the project directory:
-
-bash
-Copy code
 cd rule-engine-with-ast
+
+
 Build the application using Maven:
-
-bash
-Copy code
 mvn clean install
-Run the application:
 
-bash
-Copy code
+Run the application:
 mvn spring-boot:run
+
+
 Access the API at http://localhost:8080.
