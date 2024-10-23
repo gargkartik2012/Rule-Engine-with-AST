@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Rule Engine</title>
+    <link rel="stylesheet" type="text/css" href="static/styles.css"> <!-- Link to CSS for styling -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        form {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+        input[type="text"], textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        pre {
+            background-color: #f8f9fa;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            white-space: pre-wrap; /* Allows for wrapping of long lines */
+        }
+        .success {
+            color: green;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+<h1>Rule Engine with AST</h1>
+
+<!-- Form to create a rule -->
+<form action="/ui/rules/create" method="post" onsubmit="return validateRuleForm()">
+    <label for="ruleString">Enter Rule:</label>
+    <input type="text" id="ruleString" name="ruleString" placeholder="Enter rule string" required />
+    <button type="submit">Create Rule</button>
+</form>
+
+<!-- Display the AST if created -->
+<div th:if="${ast}">
+    <h3>Generated AST:</h3>
+    <pre th:text="${ast}"></pre>
+</div>
+
+<!-- Form to evaluate a rule with data -->
+<form action="/ui/rules/evaluate" method="post" onsubmit="return validateEvaluateForm()">
+    <label for="data">Evaluate Rule with Data:</label>
+    <textarea id="data" name="data" placeholder='{"age": 30, "department": "Sales", "salary": 60000}' required></textarea>
+    <input type="text" id="ruleEval" name="ruleString" placeholder="Enter rule string" required />
+    <button type="submit">Evaluate Rule</button>
+</form>
+
+<!-- Form to combine two rules -->
+<form action="/ui/rules/combine" method="post" onsubmit="return validateCombineForm()">
+    <h3>Combine Two Rules</h3>
+    <label for="rule1">Rule 1:</label>
+    <input type="text" id="rule1" name="rule1String" placeholder="Enter first rule string" required />
+
+    <label for="rule2">Rule 2:</label>
+    <input type="text" id="rule2" name="rule2String" placeholder="Enter second rule string" required />
+
+    <button type="submit">Combine Rules</button>
+</form>
+
+<!-- Display combined result if available -->
+<div th:if="${combinedResult}">
+    <h3>Combined Rule:</h3>
+    <pre th:text="${combinedResult}"></pre>
+</div>
+
+<!-- Display evaluation result if available -->
+<div th:if="${result}">
+    <h3>Evaluation Result:</h3>
+    <p th:text="${result}"></p>
+</div>
+
+<!-- Success message example -->
+<div th:if="${successMessage}" class="success">
+    <p th:text="${successMessage}"></p>
+</div>
+
+<script>
+    function validateRuleForm() {
+        // Add your custom validation logic for rule creation
+        return true; // Change this to false if validation fails
+    }
+
+    function validateEvaluateForm() {
+        // Add your custom validation logic for rule evaluation
+        return true; // Change this to false if validation fails
+    }
+
+    function validateCombineForm() {
+        // Add your custom validation logic for rule combination
+        return true; // Change this to false if validation fails
+    }
+</script>
+</body>
+</html>
